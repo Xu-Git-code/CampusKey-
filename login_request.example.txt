@@ -1,0 +1,55 @@
+# ================================================================
+#  登录请求模板
+#
+#  用法：复制本文件为 login_request.txt，然后把 F12 抓到的登录请求
+#        粘贴到文件末尾。login_request.txt 已被 .gitignore 忽略。
+#
+#  推荐步骤（详见 抓包教学.md）：
+#   1. F12 -> Network(网络) -> 勾选 Preserve log / Disable cache
+#   2. 在校园网登录页输入账号密码，点登录
+#   3. 找到那条登录请求（POST 或 GET，名字常见 login / InterFace.do / ...）
+#   4. 右键该请求 -> Copy(复制) -> Copy as cURL (bash)
+#   5. 把复制到的一大段内容整段粘贴到本文件末尾
+#
+#  粘贴后建议替换（以后改密码、IP 变了都不用重新抓包）：
+#     密码的值 -> {password}（JSON 用）或 {password_urlencoded}（表单/URL 用）
+#     账号的值 -> {username}
+#     本机 IP  -> {local_ip}
+#  可用占位符：
+#     {username} {password} {password_urlencoded} {username_urlencoded}
+#     {local_ip} {local_mac} {hostname} {timestamp} {timestamp_ms} {date} {time}
+#
+#  支持三种格式（任选其一）：
+#     A. cURL（推荐）
+#     B. 原始 HTTP 请求（请求行 + 请求头 + 空行 + 请求体）
+#     C. 手动格式（*url / *method / 请求头 / [body]）
+# ================================================================
+
+# ------- 示例 A：cURL（推荐）-------
+# curl 'http://10.10.10.10/eportal/InterFace.do?method=login' \
+#   -H 'Content-Type: application/x-www-form-urlencoded; charset=UTF-8' \
+#   -H 'Origin: http://10.10.10.10' \
+#   -H 'Referer: http://10.10.10.10/eportal/index.jsp' \
+#   -H 'User-Agent: Mozilla/5.0 ...' \
+#   --data-raw 'userId={username}&password={password_urlencoded}&service='
+
+# ------- 示例 B：原始 HTTP 请求 -------
+# POST /eportal/InterFace.do?method=login HTTP/1.1
+# Host: 10.10.10.10
+# Content-Type: application/x-www-form-urlencoded
+# Referer: http://10.10.10.10/eportal/index.jsp
+#
+# userId={username}&password={password_urlencoded}&service=
+
+# ------- 示例 C：手动格式 -------
+# *method = POST
+# *url = http://10.10.10.10/eportal/InterFace.do?method=login
+# Content-Type: application/x-www-form-urlencoded
+# Referer: http://10.10.10.10/eportal/index.jsp
+# [body]
+# userId={username}&password={password_urlencoded}&service=
+
+# ------- 示例 D：Dr.COM 的 GET 登录（参数都在 URL 里）-------
+# *method = GET
+# *url = http://10.0.0.1/drcom/login?callback=dr1003&DDDDD={username}&upass={password_urlencoded}&0MKKey=123456&R1=0&R3=1&R6=0&para=00&user_account={username}&user_password={password_urlencoded}&wlan_user_ip={local_ip}&operate=portal_login
+# Referer: http://10.0.0.1/

@@ -1,0 +1,26 @@
+# 本地配置：含账号密码，绝对不要提交
+config.ini
+login_request.txt
+
+# 日志与调试输出
+logs/
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# 打包产物
+build/
+dist/
+*.spec
+*.exe
+
+# 编辑器 / 系统
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
